@@ -3,9 +3,11 @@
 		<link rel="stylesheet" href="slang.css">
 	</head>
 	<body>
-		<textarea id="slangInput" class="area"></textarea>
+		<textarea id="slangCode" class="area"></textarea>
+		<textarea id="slangInput" rows="1" placeholder="Input"></textarea>
 		<button id="runButton" onclick="run()">Run</button>
-		<textarea id="slangOutput" editable="false" class="area"></textarea>
+		<button id="convertButton" onclick="convert()">Convert from BF</button>
+		<textarea id="slangOutput" class="area" wrap="off" readonly></textarea>
 		<div id="debug">[]</div>
 		<script src="slang.js"></script>
 	</body>

@@ -1,4 +1,9 @@
 .area{
 	width: 100%;
 	height: 45%;
+	overflow: auto;
+}
+#slangInput{
+	width: 100%;
+	resize: none;
 }

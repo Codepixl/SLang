@@ -42,6 +42,16 @@ So, for instance, with `:{ D: }:`, the current value would be decreased until it
 
 This would be like having `while(value){...}`.
 
+### :O
+
+Equivalent to `,` in BF. (Reads the next character from the input and stores it into the current location in memory.)
+
+For example, if `ABC` was in the input, and you ran the program `:O ;P :O ;P`, then it would print `AB`.
+
+### Comments
+
+You can comment using `#`.
+
 ## The interesting stuff
 
 Now here's where it gets a little different from BF.
