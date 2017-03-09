@@ -356,3 +356,16 @@ function debugOut(){
 			debugBox.innerHTML+="'"+String.fromCharCode(stack[i])+"', ";
 	debugBox.innerHTML = debugBox.innerHTML.slice(0, -2)+"]";
 }
+
+function selectDemo(){
+	var demo = document.getElementById("demoSelection").value;
+	var xhttp = new XMLHttpRequest();
+	xhttp.onreadystatechange = function() {
+	    if (this.readyState == 4 && this.status == 200)
+	       codeBox.value = xhttp.responseText;
+		else
+			alert("There was an error getting the demo.")
+	};
+	xhttp.open("GET", "/examples/"+demo+".sl", true);
+	xhttp.send();
+}

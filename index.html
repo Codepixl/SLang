@@ -1,14 +1,35 @@
 <html>
 	<head>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="slang.css">
+		<title>SLang</title>
 	</head>
 	<body>
-		<textarea id="slangCode" class="area"></textarea>
-		<textarea id="slangInput" rows="1" placeholder="Input"></textarea>
-		<button id="runButton" onclick="run()">Run</button>
-		<button id="convertButton" onclick="convert()">Convert from BF</button>
-		<textarea id="slangOutput" class="area" wrap="off" readonly></textarea>
-		<div id="debug">[]</div>
+		<div class="header">
+			<h1 class="headerText">SLang</h1>
+			<h2 class="subline">An esoteric language</h2>
+			<a class="btn" href="http://www.github.com/Codepixl/SLang">View source</a>
+			<a class="btn" href="http://www.github.com/Codepixl/SLang/blob/master/README.md">Get Started</a>
+		</div>
+		<div class="flex container">
+			<h2>Demo</h2>
+			<textarea id="slangCode" class="area" placeholder="Enter your code here. You can enter BrainF**k code and hit the convert button to convert it to SLang."></textarea>
+			<textarea id="slangInput" rows="1" placeholder="Input"></textarea>
+			<div class="flex">
+				<button id="runButton" onclick="run()">Run</button>
+				<button id="convertButton" onclick="convert()">Convert from BF</button>
+				<select onchange="selectDemo()" id="demoSelection">
+					<option disabled selected>Select a demo</option>
+					<option value="helloworld">Hello World</option>
+					<option value="countdown">Countdown</option>
+					<option value="add">Add</option>
+					<option value="reverse">Reverse</option>
+				</select>
+			</div>
+			<textarea id="slangOutput" class="area" wrap="off" placeholder="Output here" readonly></textarea>
+			<h3>Debug output</h3>
+			<div id="debug">[]<br>[]</div>
+		</div>
 		<script src="slang.js"></script>
 	</body>
 </html>
