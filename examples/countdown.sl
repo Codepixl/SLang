@@ -12,4 +12,6 @@
 	};
 ]:
 
-:D :D :D :D :D :D :D ;)"countdown"
+XD ;D :D #Add 26
+
+;)"countdown" #Call countdown

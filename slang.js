@@ -363,9 +363,7 @@ function selectDemo(){
 	xhttp.onreadystatechange = function() {
 	    if (this.readyState == 4 && this.status == 200)
 	       codeBox.value = xhttp.responseText;
-		else
-			alert("There was an error getting the demo.")
 	};
-	xhttp.open("GET", "/examples/"+demo+".sl", true);
+	xhttp.open("GET", "https://raw.githubusercontent.com/Codepixl/SLang/master/examples/"+demo+".sl", true);
 	xhttp.send();
 }
