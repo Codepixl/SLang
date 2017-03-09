@@ -5,7 +5,7 @@ var code = (function(){
 	const ignoreRegexp = /\t| |\n|([#]+.*)/g;
 	const stringRegexp = /(["'])(?:(?=(\\?))\2.)*?\1/;
 
-	onmessage = function(e) {
+	self.onmessage = function(e) {
 		codeBox = e.data.codeBox;
 		inBox = e.data.inBox;
 		run();
@@ -31,6 +31,7 @@ var code = (function(){
 		input = inBox.match(/.{1}/g) || [];
 
 		var code = codeBox.replace(ignoreRegexp,"").match(/(["'])(?:(?=(\\?))\2.)*?\1|(.{2})/g)
+		var matched = []
 
 		//verifying and adding funcs
 		for(var i = 0; i < code.length; i++){
@@ -39,26 +40,26 @@ var code = (function(){
 				outBox = "Unknown instruction "+code[i]
 				return;
 			}
+			if(inst) matched.push(inst.do);
+			else matched.push(err);
 			if(inst && inst.preexec)
 				inst.do({code: code, i:i});
 		}
 
 		outBox = "Output:\n";
-		var lastOut = performance.now();
+		var ret,c = 0;
 		for(var i = 0; i < code.length; i++){
-			var it = instructionTypes[code[i]];
-			if(!it){
-				outBox += "\nUnexpected String Literal.\n";
-				return;
-			}
-			var ret = it.do({code: code, i:i});
-			if(ret !== undefined)
-				i = ret-1;
-			if(performance.now()-lastOut > 500){
+			ret = matched[i]({code: code, i:i});
+			i = ret == undefined ? i : ret-1;
+			if(c++ > 500000){
+				c = 0;
 				out();
-				lastOut = performance.now();
 			}
 		};
+	}
+
+	function err(message){
+		outBox+=(message || "UNKNOWN ERROR")+"\n";
 	}
 
 	function out(){
@@ -330,6 +331,7 @@ function run(){
 		worker.postMessage({codeBox: codeBox.value, inBox: inBox.value});
 	}else{
 		worker.terminate();
+		worker = undefined;
 		runButton.innerHTML = "Run";
 	}
 	running = !running;
