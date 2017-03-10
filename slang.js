@@ -305,6 +305,7 @@ const inBox = document.getElementById("slangInput");
 const outBox = document.getElementById("slangOutput");
 const debugBox = document.getElementById("debug");
 const runButton = document.getElementById("runButton");
+const enableDebug = document.getElementById("enableDebug");
 
 var stack = [0]
 var stacki = 0
@@ -342,19 +343,17 @@ function convert(){
 }
 
 function debugOut(){
-	debugBox.innerHTML = "[";
-	for(var i = 0; i < stack.length; i++)
-		if(i == stacki)
-			debugBox.innerHTML+="<b>"+stack[i]+"</b>, ";
-		else
-			debugBox.innerHTML+=stack[i]+", ";
-	debugBox.innerHTML = debugBox.innerHTML.slice(0, -2)+"]<br>[";
-	for(var i = 0; i < stack.length; i++)
-		if(i == stacki)
-			debugBox.innerHTML+="<b>'"+String.fromCharCode(stack[i])+"'</b>, ";
-		else
-			debugBox.innerHTML+="'"+String.fromCharCode(stack[i])+"', ";
-	debugBox.innerHTML = debugBox.innerHTML.slice(0, -2)+"]";
+	if(enableDebug.checked){
+		var charArray = stack.slice(0);
+		charArray.forEach(function(v,i){
+			charArray[i] = String.fromCharCode(v);
+		});
+		debugBox.value = "index:"+stacki+"\n["+stack+"]\n["+charArray+"]";
+	}
+}
+
+function changeDebug(){
+	debugBox.style.display = enableDebug.checked ? 'initial' : 'none';
 }
 
 function selectDemo(){
